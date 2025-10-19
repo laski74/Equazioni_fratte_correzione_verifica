@@ -1,0 +1,901 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Correzione Verifica - Frazioni Algebriche ed Equazioni Fratte</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            line-height: 1.6;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .quote {
+            font-style: italic;
+            margin-top: 10px;
+            opacity: 0.9;
+        }
+        
+        /* Tab Navigation */
+        .tab-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        .tab-buttons {
+            display: flex;
+            background-color: #f8f9fa;
+            border-bottom: 3px solid #667eea;
+        }
+        .tab-button {
+            flex: 1;
+            padding: 20px;
+            background-color: transparent;
+            border: none;
+            font-size: 1.1em;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #555;
+        }
+        .tab-button:hover {
+            background-color: #e9ecef;
+        }
+        .tab-button.active {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .tab-content {
+            display: none;
+            padding: 30px;
+            animation: fadeIn 0.5s;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .version-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .version-a {
+            background-color: #4caf50;
+            color: white;
+        }
+        .version-b {
+            background-color: #2196f3;
+            color: white;
+        }
+        .esercizio {
+            background-color: #fafafa;
+            padding: 25px;
+            margin-bottom: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.08);
+            border-left: 5px solid #667eea;
+        }
+        .numero-esercizio {
+            background-color: #667eea;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            display: inline-block;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .punti {
+            float: right;
+            color: #667eea;
+            font-weight: bold;
+        }
+        .testo-esercizio {
+            background-color: #f8f9fa;
+            padding: 15px;
+            border-left: 4px solid #667eea;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .soluzione {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e8f5e9;
+            border-left: 4px solid #4caf50;
+            border-radius: 4px;
+        }
+        .errori-comuni {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+        }
+        .passaggio {
+            margin: 10px 0;
+            padding: 10px;
+            background-color: white;
+            border-radius: 4px;
+            border-left: 3px solid #ddd;
+        }
+        .attenzione {
+            color: #d32f2f;
+            font-weight: bold;
+        }
+        .risposta-finale {
+            background-color: #c8e6c9;
+            padding: 15px;
+            border-radius: 5px;
+            margin-top: 15px;
+            font-weight: bold;
+            text-align: center;
+            font-size: 1.1em;
+        }
+        h2 {
+            color: #667eea;
+            border-bottom: 2px solid #667eea;
+            padding-bottom: 10px;
+        }
+        h3 {
+            color: #764ba2;
+            margin-top: 20px;
+        }
+        .nota {
+            background-color: #e3f2fd;
+            border-left: 4px solid #2196f3;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 4px;
+            font-size: 0.95em;
+        }
+        ul {
+            margin-left: 20px;
+        }
+        li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>📚 Correzione Verifica</h1>
+        <h2>Frazioni Algebriche ed Equazioni Fratte e Letterali</h2>
+        <p class="quote">"Il successo è la somma di piccoli sforzi ripetuti giorno dopo giorno." - Robert Collier</p>
+    </div>
+
+    <!-- Tab Navigation -->
+    <div class="tab-container">
+        <div class="tab-buttons">
+            <button class="tab-button active" onclick="openTab('versionA')">
+                📝 Versione A (α)
+            </button>
+            <button class="tab-button" onclick="openTab('versionB')">
+                📝 Versione B (β)
+            </button>
+        </div>
+
+        <!-- ============================================ -->
+        <!-- VERSION A CONTENT -->
+        <!-- ============================================ -->
+        <div id="versionA" class="tab-content active">
+            <h2 style="text-align: center; color: #667eea;">
+                Correzione Completa Versione A <span class="version-badge version-a">α</span>
+            </h2>
+
+            <!-- ESERCIZIO 1 A -->
+            <div class="esercizio">
+                <div class="numero-esercizio">Esercizio 1 <span class="punti">2 punti</span></div>
+                
+                <div class="testo-esercizio">
+                    <strong>Testo:</strong> Determina per quali valori di \(b\) le seguenti frazioni algebriche sono equivalenti:
+                    $$\frac{x^2 + 2x + bx + 2b}{x^2 - 9} \quad ; \quad -\frac{4x + x^3 + 4x^2}{9x - x^3}$$
+                </div>
+
+                <div class="errori-comuni">
+                    <h3>⚠️ Errori Comuni</h3>
+                    <ul>
+                        <li><span class="attenzione">Errore 1:</span> Fattorizzare completamente invece di raccogliere solo \(x\) per confrontare i coefficienti</li>
+                        <li><span class="attenzione">Errore 2:</span> Non riconoscere che basta raccogliere \(x\) al numeratore per uguagliare i coefficienti</li>
+                        <li><span class="attenzione">Errore 3:</span> Non considerare il segno negativo nella seconda frazione</li>
+                        <li><span class="attenzione">Errore 4:</span> Dimenticare di verificare che sia il coefficiente di \(x\) che il termine noto diano lo stesso valore di \(b\)</li>
+                    </ul>
+                </div>
+
+                <div class="soluzione">
+                    <h3>✓ Soluzione Corretta</h3>
+                    
+                    <div class="passaggio">
+                        <strong>Passo 1:</strong> Semplifico la prima frazione raccogliendo parzialmente
+                        $$\frac{x^2 + 2x + bx + 2b}{x^2 - 9} = \frac{x^2 + (2+b)x + 2b}{x^2 - 9}$$
+                        
+                        <div class="nota">
+                            <strong>Osservazione:</strong> Il numeratore è nella forma \(x^2 + (2+b)x + 2b\)
+                        </div>
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 2:</strong> Semplifico la seconda frazione
+                        $$-\frac{4x + x^3 + 4x^2}{9x - x^3} = -\frac{x(4 + x^2 + 4x)}{x(9 - x^2)} = -\frac{x^2 + 4x + 4}{9 - x^2}$$
+                        
+                        Riordino il numeratore: \(x^2 + 4x + 4\)
+                        
+                        Sistemo il denominatore notando che \(9 - x^2 = -(x^2 - 9)\):
+                        $$= -\frac{x^2 + 4x + 4}{-(x^2 - 9)} = \frac{x^2 + 4x + 4}{x^2 - 9}$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 3:</strong> Riscrivo la seconda frazione raccogliendo \(x\)
+                        $$\frac{x^2 + 4x + 4}{x^2 - 9} = \frac{x(x + 4) + 4}{x(x^2 - 9)}$$
+                        
+                        Semplifico ulteriormente:
+                        $$= \frac{x(x^2 + 4x + 4)}{x(x^2 - 9)}$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 4:</strong> Uguaglio le due frazioni
+                        
+                        Le frazioni hanno lo stesso denominatore \((x^2 - 9)\), quindi:
+                        $$\frac{x^2 + (2+b)x + 2b}{x^2 - 9} = \frac{x^2 + 4x + 4}{x^2 - 9}$$
+                        
+                        I numeratori devono essere uguali:
+                        $$x^2 + (2+b)x + 2b = x^2 + 4x + 4$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 5:</strong> Confronto i coefficienti e il termine noto
+                        
+                        <div style="background-color: #fff9e6; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                            <strong>📝 ORA EGUAGLIO I COEFFICIENTI ED IL TERMINE NOTO:</strong>
+                            
+                            <p><strong>Coefficiente di \(x\):</strong></p>
+                            $$2 + b = 4$$
+                            $$b = 4 - 2 = 2$$
+                            
+                            <p><strong>Termine noto:</strong></p>
+                            $$2b = 4$$
+                            $$b = \frac{4}{2} = 2$$
+                        </div>
+                        
+                        <div class="nota">
+                            ✓ Entrambe le condizioni danno \(b = 2\), quindi la soluzione è verificata!
+                        </div>
+                    </div>
+
+                    <div class="risposta-finale">
+                        Risposta: \(b = 2\)
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESERCIZIO 2 A -->
+            <div class="esercizio">
+                <div class="numero-esercizio">Esercizio 2 <span class="punti">2 punti</span></div>
+                
+                <div class="testo-esercizio">
+                    <strong>Testo:</strong> Risolvi la seguente equazione:
+                    $$\frac{x-2}{2x^2+x} = \frac{8x+2}{4x^2-1} + \frac{3}{1-2x}$$
+                </div>
+
+                <div class="errori-comuni">
+                    <h3>⚠️ Errori Comuni</h3>
+                    <ul>
+                        <li><span class="attenzione">Errore 1:</span> Non determinare le Condizioni di Esistenza (C.E.)</li>
+                        <li><span class="attenzione">Errore 2:</span> Sbagliare il mcm dei denominatori</li>
+                        <li><span class="attenzione">Errore 3:</span> Errori di segno quando si moltiplica per il mcm</li>
+                        <li><span class="attenzione">Errore 4:</span> Non verificare la soluzione con le C.E.</li>
+                    </ul>
+                </div>
+
+                <div class="soluzione">
+                    <h3>✓ Soluzione Corretta</h3>
+                    
+                    <div class="passaggio">
+                        <strong>Passo 1:</strong> Condizioni di Esistenza
+                        $$2x^2 + x \neq 0 \Rightarrow x(2x+1) \neq 0 \Rightarrow x \neq 0 \text{ e } x \neq -\frac{1}{2}$$
+                        $$4x^2 - 1 \neq 0 \Rightarrow (2x-1)(2x+1) \neq 0 \Rightarrow x \neq \frac{1}{2} \text{ e } x \neq -\frac{1}{2}$$
+                        $$1 - 2x \neq 0 \Rightarrow x \neq \frac{1}{2}$$
+                        <div class="nota">
+                            <strong>C.E.:</strong> \(x \neq 0, \quad x \neq \frac{1}{2}, \quad x \neq -\frac{1}{2}\)
+                        </div>
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 2:</strong> Scompongo i denominatori
+                        $$\frac{x-2}{x(2x+1)} = \frac{8x+2}{(2x-1)(2x+1)} - \frac{3}{2x-1}$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 3:</strong> mcm = \(x(2x+1)(2x-1)\)
+                        $$(x-2)(2x-1) = x(8x+2) - 3x(2x+1)$$
+                        $$2x^2 - x - 4x + 2 = 8x^2 + 2x - 6x^2 - 3x$$
+                        $$2x^2 - 5x + 2 = 2x^2 - x$$
+                        $$-5x + 2 = -x$$
+                        $$-4x = -2$$
+                        $$x = \frac{1}{2}$$
+                    </div>
+
+                    <div class="nota">
+                        <strong>Verifica C.E.:</strong> \(x = \frac{1}{2}\) NON rispetta le C.E.!
+                    </div>
+
+                    <div class="risposta-finale">
+                        Risposta: <span class="attenzione">Equazione IMPOSSIBILE</span> (la soluzione non rispetta le C.E.)
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESERCIZIO 3 A -->
+            <div class="esercizio">
+                <div class="numero-esercizio">Esercizio 3 <span class="punti">2 punti</span></div>
+                
+                <div class="testo-esercizio">
+                    <strong>Testo:</strong> Indica per quali valori di \(a\) l'equazione
+                    $$\frac{5x-a}{a} = \frac{x+4}{3}$$
+                    <ul>
+                        <li><strong>a.</strong> perde significato</li>
+                        <li><strong>b.</strong> è indeterminata</li>
+                        <li><strong>c.</strong> risulta impossibile</li>
+                        <li><strong>d.</strong> ha come soluzione \(x = 8\)</li>
+                    </ul>
+                </div>
+
+                <div class="errori-comuni">
+                    <h3>⚠️ Errori Comuni</h3>
+                    <ul>
+                        <li><span class="attenzione">Errore 1:</span> Confondere "perde significato" con "impossibile"</li>
+                        <li><span class="attenzione">Errore 2:</span> Non distinguere tra equazione indeterminata (\(0 = 0\)) e impossibile (\(0 = k\), \(k \neq 0\))</li>
+                        <li><span class="attenzione">Errore 3:</span> Non sostituire correttamente \(x = 8\) nell'equazione risolta</li>
+                    </ul>
+                </div>
+
+                <div class="soluzione">
+                    <h3>✓ Soluzione Corretta</h3>
+                    
+                    <div class="passaggio">
+                        <strong>Passo 1:</strong> Risolvo l'equazione
+                        $$3(5x - a) = a(x + 4)$$
+                        $$15x - 3a = ax + 4a$$
+                        $$15x - ax = 4a + 3a$$
+                        $$x(15 - a) = 7a$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>a) Perde significato quando:</strong> \(a = 0\) (denominatore nullo nell'equazione originale)
+                        <div class="risposta-finale">
+                            \(a = 0\)
+                        </div>
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>b) È indeterminata quando:</strong> coefficiente di \(x\) = 0 E termine noto = 0
+                        $$15 - a = 0 \text{ e } 7a = 0$$
+                        $$a = 15 \text{ e } a = 0$$
+                        <div class="nota">Non esiste un valore di \(a\) che soddisfa entrambe le condizioni contemporaneamente</div>
+                        <div class="risposta-finale">
+                            <span class="attenzione">Nessun valore di \(a\)</span> (oppure \(\emptyset\))
+                        </div>
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>c) È impossibile quando:</strong> coefficiente di \(x\) = 0 E termine noto ≠ 0
+                        $$15 - a = 0 \text{ e } 7a \neq 0$$
+                        <div class="risposta-finale">
+                            \(a = 15\)
+                        </div>
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>d) Ha soluzione \(x = 8\) quando:</strong>
+                        $$x = \frac{7a}{15-a} = 8$$
+                        $$7a = 8(15-a)$$
+                        $$7a = 120 - 8a$$
+                        $$15a = 120$$
+                        <div class="risposta-finale">
+                            \(a = 8\)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESERCIZIO 4 A -->
+            <div class="esercizio">
+                <div class="numero-esercizio">Esercizio 4 <span class="punti">2 punti</span></div>
+                
+                <div class="testo-esercizio">
+                    <strong>Testo:</strong> Semplifica la seguente espressione, supponendo verificate le C.E.
+                    $$\frac{2x^4+12x}{3x^2+3x} + \left[\frac{(-2x)^3}{4-x^2} \cdot \frac{2x^2+7x+6}{6x^3}\right] : \left(-\frac{4}{x^2-4x+4}\right)$$
+                </div>
+
+                <div class="errori-comuni">
+                    <h3>⚠️ Errori Comuni</h3>
+                    <ul>
+                        <li><span class="attenzione">Errore 1:</span> Non semplificare completamente prima di operare</li>
+                        <li><span class="attenzione">Errore 2:</span> Sbagliare il segno di \((-2x)^3 = -8x^3\)</li>
+                        <li><span class="attenzione">Errore 3:</span> Dimenticare di invertire nella divisione</li>
+                        <li><span class="attenzione">Errore 4:</span> Non scomporre i trinomi di secondo grado</li>
+                    </ul>
+                </div>
+
+                <div class="soluzione">
+                    <h3>✓ Soluzione Corretta</h3>
+                    
+                    <div class="passaggio">
+                        <strong>Passo 1:</strong> Semplifico la prima frazione
+                        $$\frac{2x^4+12x}{3x^2+3x} = \frac{2x(x^3+6)}{3x(x+1)} = \frac{2(x^3+6)}{3(x+1)}$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 2:</strong> Semplifico il prodotto nella parentesi quadra
+                        $$\frac{(-2x)^3}{4-x^2} \cdot \frac{2x^2+7x+6}{6x^3} = \frac{-8x^3}{(2-x)(2+x)} \cdot \frac{(2x+3)(x+2)}{6x^3}$$
+                        $$= \frac{-8x^3(2x+3)(x+2)}{-(x-2)(x+2) \cdot 6x^3} = \frac{8(2x+3)}{6(x-2)} = \frac{4(2x+3)}{3(x-2)}$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 3:</strong> Eseguo la divisione
+                        $$\frac{4(2x+3)}{3(x-2)} : \left(-\frac{4}{(x-2)^2}\right) = \frac{4(2x+3)}{3(x-2)} \cdot \left(-\frac{(x-2)^2}{4}\right)$$
+                        $$= -\frac{(2x+3)(x-2)}{3}$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 4:</strong> Sommo tutto
+                        $$\frac{2(x^3+6)}{3(x+1)} - \frac{(2x+3)(x-2)}{3}$$
+                        $$= \frac{2(x^3+6) - (2x+3)(x-2)(x+1)}{3(x+1)}$$
+                        
+                        Sviluppando \((2x+3)(x-2) = 2x^2-x-6\):
+                        $$= \frac{2x^3+12 - (2x^2-x-6)(x+1)}{3(x+1)}$$
+                        $$= \frac{2x^3+12 - (2x^3+x^2-7x-6)}{3(x+1)}$$
+                        $$= \frac{-x^2+7x+18}{3(x+1)}$$
+                    </div>
+
+                    <div class="risposta-finale">
+                        Risposta: \(\frac{-x^2+7x+18}{3(x+1)}\)
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESERCIZIO 5 A -->
+            <div class="esercizio">
+                <div class="numero-esercizio">Esercizio 5 <span class="punti">2 punti</span></div>
+                
+                <div class="testo-esercizio">
+                    <strong>Testo:</strong> Una sarta vuole acquistare dei bottoni dal suo rivenditore di fiducia. Il prezzo di listino di ogni bottone è 54 centesimi, ma il rivenditore applica uno sconto \(s\) su ogni pezzo che dipende dal numero \(N\) di bottoni acquistati:
+                    $$s = \frac{N+16}{174} \text{ centesimi}$$
+                    <ul>
+                        <li><strong>a.</strong> Quanti bottoni deve comprare la sarta per pagare 50 centesimi a bottone?</li>
+                        <li><strong>b.</strong> Se acquista 364 bottoni, qual è la spesa totale?</li>
+                    </ul>
+                </div>
+
+                <div class="errori-comuni">
+                    <h3>⚠️ Errori Comuni</h3>
+                    <ul>
+                        <li><span class="attenzione">Errore 1:</span> Non sottrarre lo sconto dal prezzo di listino</li>
+                        <li><span class="attenzione">Errore 2:</span> Confondere prezzo unitario con spesa totale</li>
+                        <li><span class="attenzione">Errore 3:</span> Non controllare che \(N\) sia un numero intero positivo</li>
+                    </ul>
+                </div>
+
+                <div class="soluzione">
+                    <h3>✓ Soluzione Corretta</h3>
+                    
+                    <div class="passaggio">
+                        <strong>Punto a) Prezzo unitario dopo sconto:</strong>
+                        $$\text{Prezzo pagato} = 54 - s = 54 - \frac{N+16}{174}$$
+                        
+                        Vogliamo che sia uguale a 50 centesimi:
+                        $$54 - \frac{N+16}{174} = 50$$
+                        $$\frac{N+16}{174} = 4$$
+                        $$N + 16 = 696$$
+                        $$N = 680$$
+                    </div>
+
+                    <div class="risposta-finale">
+                        <strong>a)</strong> Deve comprare <strong>680 bottoni</strong>
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Punto b) Con 364 bottoni:</strong>
+                        
+                        Calcolo lo sconto:
+                        $$s = \frac{364+16}{174} = \frac{380}{174} = \frac{190}{87} \text{ centesimi}$$
+                        
+                        Prezzo unitario:
+                        $$54 - \frac{190}{87} = \frac{4698-190}{87} = \frac{4508}{87} \text{ centesimi}$$
+                        
+                        Spesa totale:
+                        $$364 \times \frac{4508}{87} = \frac{1640912}{87} = 18872 \text{ centesimi} = 188{,}72 \text{ euro}$$
+                    </div>
+
+                    <div class="risposta-finale">
+                        <strong>b)</strong> La spesa totale è <strong>188,72 euro</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- ============================================ -->
+        <!-- VERSION B CONTENT -->
+        <!-- ============================================ -->
+        <div id="versionB" class="tab-content">
+            <h2 style="text-align: center; color: #667eea;">
+                Correzione Completa Versione B <span class="version-badge version-b">β</span>
+            </h2>
+
+            <!-- ESERCIZIO 1 B -->
+            <div class="esercizio">
+                <div class="numero-esercizio">Esercizio 1 <span class="punti">2 punti</span></div>
+                
+                <div class="testo-esercizio">
+                    <strong>Testo:</strong> Determina per quali valori di \(b\) le seguenti frazioni algebriche sono equivalenti:
+                    $$\frac{x^2 + 4x + bx + 2b}{x^2 - 9} \quad ; \quad -\frac{8x + x^3 + 8x^2}{9x - x^3}$$
+                </div>
+
+                <div class="errori-comuni">
+                    <h3>⚠️ Errori Comuni</h3>
+                    <ul>
+                        <li><span class="attenzione">Errore 1:</span> Fattorizzare completamente invece di raccogliere solo \(x\) per confrontare i coefficienti</li>
+                        <li><span class="attenzione">Errore 2:</span> Non riconoscere che il metodo più efficace è raccogliere \(x\) e confrontare i coefficienti</li>
+                        <li><span class="attenzione">Errore 3:</span> Non gestire correttamente i segni nella seconda frazione</li>
+                        <li><span class="attenzione">Errore 4:</span> Dimenticare di verificare che entrambi i confronti (coefficiente di \(x\) e termine noto) diano lo stesso \(b\)</li>
+                    </ul>
+                </div>
+
+                <div class="soluzione">
+                    <h3>✓ Soluzione Corretta</h3>
+                    
+                    <div class="passaggio">
+                        <strong>Passo 1:</strong> Semplifico la prima frazione raccogliendo parzialmente
+                        $$\frac{x^2 + 4x + bx + 2b}{x^2 - 9} = \frac{x^2 + (4+b)x + 2b}{x^2 - 9}$$
+                        
+                        <div class="nota">
+                            <strong>Osservazione:</strong> Il numeratore è nella forma \(x^2 + (4+b)x + 2b\)
+                        </div>
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 2:</strong> Semplifico la seconda frazione
+                        $$-\frac{8x + x^3 + 8x^2}{9x - x^3} = -\frac{x(8 + x^2 + 8x)}{x(9 - x^2)} = -\frac{x^2 + 8x + 8}{9 - x^2}$$
+                        
+                        Riordino il numeratore: \(x^2 + 8x + 8\)
+                        
+                        Sistemo il denominatore notando che \(9 - x^2 = -(x^2 - 9)\):
+                        $$= -\frac{x^2 + 8x + 8}{-(x^2 - 9)} = \frac{x^2 + 8x + 8}{x^2 - 9}$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 3:</strong> Riscrivo la seconda frazione
+                        $$\frac{x^2 + 8x + 8}{x^2 - 9}$$
+                        
+                        Il numeratore è già nella forma standard: \(x^2 + 8x + 8\)
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 4:</strong> Uguaglio le due frazioni
+                        
+                        Le frazioni hanno lo stesso denominatore \((x^2 - 9)\), quindi:
+                        $$\frac{x^2 + (4+b)x + 2b}{x^2 - 9} = \frac{x^2 + 8x + 8}{x^2 - 9}$$
+                        
+                        I numeratori devono essere uguali:
+                        $$x^2 + (4+b)x + 2b = x^2 + 8x + 8$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 5:</strong> Confronto i coefficienti e il termine noto
+                        
+                        <div style="background-color: #fff9e6; padding: 15px; border-radius: 5px; margin: 10px 0;">
+                            <strong>📝 ORA EGUAGLIO I COEFFICIENTI ED IL TERMINE NOTO:</strong>
+                            
+                            <p><strong>Coefficiente di \(x\):</strong></p>
+                            $$4 + b = 8$$
+                            $$b = 8 - 4 = 4$$
+                            
+                            <p><strong>Termine noto:</strong></p>
+                            $$2b = 8$$
+                            $$b = \frac{8}{2} = 4$$
+                        </div>
+                        
+                        <div class="nota">
+                            ✓ Entrambe le condizioni danno \(b = 4\), quindi la soluzione è verificata!
+                        </div>
+                    </div>
+
+                    <div class="risposta-finale">
+                        Risposta: \(b = 4\)
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESERCIZIO 2 B -->
+            <div class="esercizio">
+                <div class="numero-esercizio">Esercizio 2 <span class="punti">2 punti</span></div>
+                
+                <div class="testo-esercizio">
+                    <strong>Testo:</strong> Risolvi la seguente equazione:
+                    $$\frac{x-3}{x+5} - \frac{2x-3}{2-x} = 3 - \frac{6x-19}{x^2+3x-10}$$
+                </div>
+
+                <div class="errori-comuni">
+                    <h3>⚠️ Errori Comuni</h3>
+                    <ul>
+                        <li><span class="attenzione">Errore 1:</span> Non riconoscere che \(2-x = -(x-2)\)</li>
+                        <li><span class="attenzione">Errore 2:</span> Errori nella scomposizione di \(x^2+3x-10\)</li>
+                        <li><span class="attenzione">Errore 3:</span> Non verificare la soluzione con le C.E.</li>
+                    </ul>
+                </div>
+
+                <div class="soluzione">
+                    <h3>✓ Soluzione Corretta</h3>
+                    
+                    <div class="passaggio">
+                        <strong>Passo 1:</strong> Scompongo \(x^2 + 3x - 10 = (x+5)(x-2)\)
+                        
+                        C.E.: \(x \neq -5, \quad x \neq 2\)
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 2:</strong> Riscrivo l'equazione
+                        $$\frac{x-3}{x+5} + \frac{2x-3}{x-2} = 3 - \frac{6x-19}{(x+5)(x-2)}$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 3:</strong> mcm = \((x+5)(x-2)\)
+                        $$(x-3)(x-2) + (2x-3)(x+5) = 3(x+5)(x-2) - (6x-19)$$
+                        $$x^2 - 5x + 6 + 2x^2 + 7x - 15 = 3(x^2 + 3x - 10) - 6x + 19$$
+                        $$3x^2 + 2x - 9 = 3x^2 + 9x - 30 - 6x + 19$$
+                        $$3x^2 + 2x - 9 = 3x^2 + 3x - 11$$
+                        $$2x - 9 = 3x - 11$$
+                        $$-x = -2$$
+                        $$x = 2$$
+                    </div>
+
+                    <div class="nota">
+                        <strong>Verifica C.E.:</strong> \(x = 2\) NON rispetta le C.E.!
+                    </div>
+
+                    <div class="risposta-finale">
+                        Risposta: <span class="attenzione">Equazione IMPOSSIBILE</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESERCIZIO 3 B -->
+            <div class="esercizio">
+                <div class="numero-esercizio">Esercizio 3 <span class="punti">2 punti</span></div>
+                
+                <div class="testo-esercizio">
+                    <strong>Testo:</strong> Indica per quali valori di \(a\) l'equazione
+                    $$\frac{x+4}{3} = \frac{5x-a}{a}$$
+                    <ul>
+                        <li><strong>a.</strong> perde significato</li>
+                        <li><strong>b.</strong> è indeterminata</li>
+                        <li><strong>c.</strong> risulta impossibile</li>
+                        <li><strong>d.</strong> ha come soluzione \(x = 8\)</li>
+                    </ul>
+                </div>
+
+                <div class="soluzione">
+                    <h3>✓ Soluzione Corretta</h3>
+                    
+                    <div class="passaggio">
+                        <strong>Nota:</strong> Questa equazione è identica a quella della Versione A, solo scritta in ordine inverso.
+                        
+                        Risolvo l'equazione:
+                        $$a(x+4) = 3(5x-a)$$
+                        $$ax + 4a = 15x - 3a$$
+                        $$ax - 15x = -3a - 4a$$
+                        $$x(a-15) = -7a$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>a) Perde significato quando:</strong> \(a = 0\)
+                        <div class="risposta-finale">
+                            \(a = 0\)
+                        </div>
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>b) È indeterminata quando:</strong> 
+                        $$a - 15 = 0 \text{ e } -7a = 0$$
+                        $$a = 15 \text{ e } a = 0$$
+                        <div class="nota">Impossibile soddisfare entrambe</div>
+                        <div class="risposta-finale">
+                            <span class="attenzione">Nessun valore di \(a\)</span>
+                        </div>
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>c) È impossibile quando:</strong>
+                        $$a - 15 = 0 \text{ e } -7a \neq 0$$
+                        <div class="risposta-finale">
+                            \(a = 15\)
+                        </div>
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>d) Ha soluzione \(x = 8\) quando:</strong>
+                        $$x = \frac{-7a}{a-15} = 8$$
+                        $$-7a = 8(a-15)$$
+                        $$-7a = 8a - 120$$
+                        $$-15a = -120$$
+                        <div class="risposta-finale">
+                            \(a = 8\)
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESERCIZIO 4 B -->
+            <div class="esercizio">
+                <div class="numero-esercizio">Esercizio 4 <span class="punti">2 punti</span></div>
+                
+                <div class="testo-esercizio">
+                    <strong>Testo:</strong> Semplifica la seguente espressione, supponendo verificate le C.E.
+                    $$\left[\frac{(-2x)^3}{4-x^2} \cdot \frac{2x^2+7x+6}{6x^3}\right] : \left(-\frac{4}{x^2-4x+4}\right) + \frac{2x^4+12x}{3x^2+3x}$$
+                </div>
+
+                <div class="nota">
+                    <strong>Nota:</strong> Questa espressione ha gli stessi termini della Versione A, ma in ordine diverso. La soluzione è la stessa.
+                </div>
+
+                <div class="soluzione">
+                    <h3>✓ Soluzione Corretta</h3>
+                    
+                    <div class="passaggio">
+                        <strong>Passo 1:</strong> Semplifico il prodotto nella parentesi quadra
+                        $$\frac{(-2x)^3}{4-x^2} \cdot \frac{2x^2+7x+6}{6x^3} = \frac{-8x^3}{(2-x)(2+x)} \cdot \frac{(2x+3)(x+2)}{6x^3}$$
+                        $$= \frac{4(2x+3)}{3(x-2)}$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 2:</strong> Eseguo la divisione
+                        $$\frac{4(2x+3)}{3(x-2)} : \left(-\frac{4}{(x-2)^2}\right) = -\frac{(2x+3)(x-2)}{3}$$
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Passo 3:</strong> Semplifico l'ultima frazione e sommo
+                        $$-\frac{(2x+3)(x-2)}{3} + \frac{2(x^3+6)}{3(x+1)}$$
+                        $$= \frac{-(2x+3)(x-2)(x+1) + 2(x^3+6)}{3(x+1)}$$
+                        $$= \frac{-x^2+7x+18}{3(x+1)}$$
+                    </div>
+
+                    <div class="risposta-finale">
+                        Risposta: \(\frac{-x^2+7x+18}{3(x+1)}\)
+                    </div>
+                </div>
+            </div>
+
+            <!-- ESERCIZIO 5 B -->
+            <div class="esercizio">
+                <div class="numero-esercizio">Esercizio 5 <span class="punti">2 punti</span></div>
+                
+                <div class="testo-esercizio">
+                    <strong>Testo:</strong> Una sarta vuole acquistare dei bottoni dal suo rivenditore di fiducia. Il prezzo di listino di ogni bottone è 54 centesimi, ma il rivenditore applica uno sconto \(s\) su ogni pezzo che dipende dal numero \(N\) di bottoni acquistati:
+                    $$s = \frac{N+16}{174} \text{ centesimi}$$
+                    <ul>
+                        <li><strong>a.</strong> Quanti bottoni deve comprare la sarta per pagare 50 centesimi a bottone?</li>
+                        <li><strong>b.</strong> Se acquista 364 bottoni, qual è la spesa totale?</li>
+                    </ul>
+                </div>
+
+                <div class="nota">
+                    <strong>Nota:</strong> Questo problema è identico in entrambe le versioni.
+                </div>
+
+                <div class="soluzione">
+                    <h3>✓ Soluzione Corretta</h3>
+                    
+                    <div class="passaggio">
+                        <strong>Punto a)</strong>
+                        $$54 - \frac{N+16}{174} = 50$$
+                        $$\frac{N+16}{174} = 4$$
+                        $$N = 680$$
+                    </div>
+
+                    <div class="risposta-finale">
+                        <strong>a)</strong> Deve comprare <strong>680 bottoni</strong>
+                    </div>
+
+                    <div class="passaggio">
+                        <strong>Punto b)</strong>
+                        $$\text{Spesa} = 364 \times \left(54 - \frac{380}{174}\right) = 364 \times \frac{4508}{87} = 188{,}72 \text{ euro}$$
+                    </div>
+
+                    <div class="risposta-finale">
+                        <strong>b)</strong> La spesa totale è <strong>188,72 euro</strong>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- SUGGERIMENTI FINALI -->
+    <div class="esercizio" style="background-color: #e8eaf6; border-left: 5px solid #3f51b5;">
+        <h2 style="color: #3f51b5; text-align: center;">💡 Suggerimenti per Migliorare</h2>
+        
+        <div style="padding: 20px;">
+            <h3>📌 Strategia per le Equazioni Fratte:</h3>
+            <ol>
+                <li><strong>SEMPRE</strong> determinare le C.E. come primo passo</li>
+                <li>Scomporre tutti i denominatori in fattori</li>
+                <li>Trovare il mcm con attenzione ai segni</li>
+                <li>Moltiplicare entrambi i membri per il mcm</li>
+                <li><strong>VERIFICARE</strong> che la soluzione rispetti le C.E.</li>
+            </ol>
+
+            <h3>📌 Strategia per le Semplificazioni:</h3>
+            <ol>
+                <li>Scomporre numeratori e denominatori completamente</li>
+                <li>Semplificare i fattori comuni prima di moltiplicare</li>
+                <li>Attenzione ai segni, specialmente nelle sottrazioni</li>
+                <li>Nella divisione, ricordarsi di invertire la seconda frazione</li>
+            </ol>
+
+            <h3>📌 Per le Equazioni Letterali:</h3>
+            <ul>
+                <li><strong>Perde significato:</strong> quando si annulla un denominatore</li>
+                <li><strong>Indeterminata:</strong> quando diventa \(0 \cdot x = 0\) (infinite soluzioni)</li>
+                <li><strong>Impossibile:</strong> quando diventa \(0 \cdot x = k\) con \(k \neq 0\) (nessuna soluzione)</li>
+            </ul>
+
+            <h3>📌 Studio Consigliato:</h3>
+            <ul>
+                <li>Rivedere gli esercizi sbagliati e capire DOVE è avvenuto l'errore</li>
+                <li>Esercitarsi sulle scomposizioni di polinomi</li>
+                <li>Allenarsi con le C.E. di equazioni fratte</li>
+                <li>Prestare massima attenzione ai segni nelle operazioni</li>
+            </ul>
+
+            <h3>📌 Per Studenti con DSA:</h3>
+            <ul>
+                <li>Usare colori diversi per evidenziare passaggi importanti</li>
+                <li>Creare schemi riassuntivi dei procedimenti</li>
+                <li>Utilizzare formulari personalizzati</li>
+                <li>Suddividere esercizi complessi in micro-passaggi</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function openTab(tabName) {
+            // Hide all tab contents
+            var tabContents = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabContents.length; i++) {
+                tabContents[i].classList.remove("active");
+            }
+            
+            // Remove active class from all buttons
+            var tabButtons = document.getElementsByClassName("tab-button");
+            for (var i = 0; i < tabButtons.length; i++) {
+                tabButtons[i].classList.remove("active");
+            }
+            
+            // Show the selected tab and mark button as active
+            document.getElementById(tabName).classList.add("active");
+            event.currentTarget.classList.add("active");
+        }
+    </script>
+</body>
+</html>
